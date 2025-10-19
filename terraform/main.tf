@@ -1,19 +1,3 @@
-terraform {
-  required_version = ">= 1.6.0"
-  required_providers {
-    proxmox = {
-      source  = "bpg/proxmox"
-      version = ">= 0.70.0"
-    }
-  }
-}
-
-provider "proxmox" {
-  endpoint  = var.pm_api_url
-  api_token = var.pm_api_token
-  insecure  = true
-}
-
 locals {
   nodes = {
     vkm1 = { vm_id = 8101, memory = 2048,  cores = 2, longhorn_disk_gb = 0 }
@@ -44,6 +28,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
     cores   = each.value.cores
     type    = "x86-64-v2-AES"
   }
+
   memory {
     dedicated = each.value.memory
   }
@@ -56,6 +41,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
     discard      = "on"
   }
 
+  # Extra 300 GB disk for worker nodes
   dynamic "disk" {
     for_each = each.value.longhorn_disk_gb > 0 ? [1] : []
     content {
@@ -95,7 +81,6 @@ resource "proxmox_virtual_environment_vm" "vm" {
   }
 
   serial_device {}
-
   display {
     type = "serial0"
   }
@@ -107,4 +92,6 @@ output "vm_ids" {
   value = { for k, v in proxmox_virtual_environment_vm.vm : k => v.vm_id }
 }
 
-
+output "vm_ips" {
+  value = var.node_ipv4
+}
