@@ -65,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "vm" {
 
     user_account {
       username = var.ci_user
-      keys     = [file(var.ssh_public_key_path)] # /root/.ssh/id_rsa.pub
+      keys     = [file(var.ssh_public_key_path)]  
     }
 
     ip_config {

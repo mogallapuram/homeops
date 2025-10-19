@@ -31,7 +31,7 @@ root_disk_gb  = 30
 #########################################
 
 # Username for cloud-init (created inside VM)
-ci_user = "ram"
+ci_user = "ubuntu"
 
 # Path to your SSH public key for VM access
 ssh_public_key_path = "/root/.ssh/id_rsa.pub"
