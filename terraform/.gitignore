@@ -1,0 +1,17 @@
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+terraform.tfvars
+
+# Proxmox/VM images
+*.qcow2
+*.img
+
+# Sensitive tokens or keys
+*.pem
+*.key
+*.crt
+*.pub
+id_rsa*
+secrets.env
