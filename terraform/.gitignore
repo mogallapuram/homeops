@@ -1,17 +1,9 @@
-# Terraform
+# Ignore sensitive Terraform files
+terraform.tfvars
 *.tfstate
 *.tfstate.backup
 .terraform/
-terraform.tfvars
 
-# Proxmox/VM images
-*.qcow2
-*.img
-
-# Sensitive tokens or keys
-*.pem
-*.key
-*.crt
-*.pub
-id_rsa*
-secrets.env
+# Safe to keep public key, but exclude private keys
+keys/*.key
+keys/*.pem

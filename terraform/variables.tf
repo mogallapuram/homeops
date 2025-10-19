@@ -45,7 +45,7 @@ variable "root_disk_gb" {
 variable "ci_user" {
   description = "Cloud-init username to create inside the VM"
   type        = string
-  default     = "ram"
+  default     = "ubuntu"
 }
 
 variable "ci_password" {
@@ -58,7 +58,7 @@ variable "ci_password" {
 variable "ssh_public_key_path" {
   description = "Path to SSH public key to inject"
   type        = string
-  default     = "/root/.ssh/id_rsa.pub"
+  default     = "keys/public-key.pub"
 }
 
 # --- Static IPs per node ---
