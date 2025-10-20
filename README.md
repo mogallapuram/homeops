@@ -23,7 +23,7 @@ The goal of HomeOps is to create a **self-hosted, production-style environment**
 |-----------|-------|
 | Operating System | **Ubuntu 25.10** |
 | Kubernetes | [K3s](https://k3s.io/) |
-| Automation | [Ansible](https://www.ansible.com/), [n8n](https://n8n.io/) |
+| Automation | [Ansible](https://www.ansible.com/), [n8n](https://n8n.io/) |[terraform](https://developer.hashicorp.com/terraform)
 | Orchestration | [Helm](https://helm.sh/) |
 | Storage | NFS, Longhorn |
 | Database | [Percona PostgreSQL for Kubernetes](https://www.percona.com/software/percona-distribution-for-postgresql) |
