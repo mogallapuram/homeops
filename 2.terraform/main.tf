@@ -5,7 +5,6 @@ locals {
     vkm3 = { vm_id = 8103, memory = 2048,  cores = 2, longhorn_disk_gb = 0 }
     vkn1 = { vm_id = 8111, memory = 16384, cores = 4, longhorn_disk_gb = 300 }
     vkn2 = { vm_id = 8112, memory = 16384, cores = 4, longhorn_disk_gb = 300 }
-    ansible = { vm_id = 8120, memory = 4096, cores = 2, longhorn_disk_gb = 0 }
   }
 }
 
