@@ -1,6 +1,6 @@
-# --- Proxmox provider inputs ---
+# --- Proxmox API Configuration ---
 variable "pm_api_url" {
-  description = "Proxmox API endpoint, e.g. https://10.10.10.200:8006/api2/json"
+  description = "Proxmox API endpoint (can be any node in cluster)"
   type        = string
 }
 
@@ -10,12 +10,7 @@ variable "pm_api_token" {
   sensitive   = true
 }
 
-variable "pm_node" {
-  description = "Proxmox node name"
-  type        = string
-  default     = "node1"
-}
-
+# --- Proxmox Storage Configuration ---
 variable "pm_datastore" {
   description = "Proxmox datastore/storage ID (e.g., local-lvm)"
   type        = string
@@ -28,42 +23,36 @@ variable "bridge" {
   default     = "vmbr0"
 }
 
-# --- Template / VM defaults ---
-variable "template_vmid" {
-  description = "VMID of the cloud-init template to clone"
-  type        = number
-  default     = 8000
-}
-
+# --- VM Disk Configuration ---
 variable "root_disk_gb" {
   description = "Root disk size (GB) for all VMs"
   type        = number
   default     = 30
 }
 
-# --- Cloud-init user ---
+# --- Cloud-init Configuration ---
 variable "ci_user" {
   description = "Cloud-init username to create inside the VM"
   type        = string
-  default     = "ubuntu"
+  default     = "ram"
 }
 
 variable "ci_password" {
-  description = "Optional password for the cloud-init user (not recommended)"
+  description = "Optional password for cloud-init user (not recommended, use SSH keys)"
   type        = string
   default     = null
   sensitive   = true
 }
 
 variable "ssh_public_key_path" {
-  description = "Path to SSH public key to inject"
+  description = "Path to SSH public key to inject via cloud-init"
   type        = string
   default     = "keys/public-key.pub"
 }
 
-# --- Static IPs per node ---
+# --- Network Configuration ---
 variable "node_ipv4" {
-  description = "Map of node name to IPv4 CIDR (e.g., 10.10.11.1/23)"
+  description = "Map of VM name to IPv4 CIDR (e.g., 10.10.11.1/23)"
   type        = map(string)
 }
 
@@ -71,4 +60,12 @@ variable "ipv4_gateway" {
   description = "Default IPv4 gateway"
   type        = string
   default     = "10.10.10.1"
+}
+
+# --- Optional: Consul Configuration (if ACL enabled) ---
+variable "consul_token" {
+  description = "Consul ACL token for state backend (optional)"
+  type        = string
+  default     = ""
+  sensitive   = true
 }

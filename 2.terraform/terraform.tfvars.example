@@ -1,62 +1,31 @@
-#########################################
 # Proxmox API Configuration
-#########################################
+pm_api_url   = "https://PROXMOX_IP:8006/api2/json"
+pm_api_token = "terraform@pve!tf=YOUR-TOKEN-HERE"
 
-# Your Proxmox API endpoint (usually node IP + /api2/json)
-pm_api_url   = "https://10.10.10.200:8006/api2/json"
-
-# Token format: user@realm!tokenid=value
-# Example: "terraform@pve!tf=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-pm_api_token = "terraform@pve!tf=<YOUR_TOKEN_HERE>"
-
-# Proxmox Node and Datastore details
-pm_node      = "node1"
+# Proxmox Storage
 pm_datastore = "local-lvm"
+template_name = "ubuntu-cloud-24.04"  # Same template name on both nodes (e.g., ubuntu-cloud-24.04)
 bridge       = "vmbr0"
 
+# VM Disk Configuration
+root_disk_gb = 30
 
-#########################################
-# Template and VM Settings
-#########################################
-
-# The VMID of your Ubuntu 25.10 cloud-init template
-template_vmid = 8000
-
-# Default root disk size for all VMs (GB)
-root_disk_gb  = 30
-
-
-#########################################
 # Cloud-init Configuration
-#########################################
+ci_user             = "ram"
+ssh_public_key_path = "keys/public-key.pub"
 
-# Username for cloud-init (created inside VM)
-ci_user = "ubuntu"
-
-# Path to your SSH public key for VM access
-ssh_public_key_path = "/root/.ssh/id_rsa.pub"
-
-# Optional password for the cloud-init user (not recommended)
-# ci_password = "changeme"
-
-
-#########################################
-# Static IP Mapping for Each Node
-#########################################
-
+# K3s Cluster Network Configuration
+# 3 Master nodes + 2 Worker nodes
+# Adjust IPs according to your network
 node_ipv4 = {
-  # Master nodes
-  vkm1    = "10.10.11.1/23"
-  vkm2    = "10.10.11.2/23"
-  vkm3    = "10.10.11.3/23"
-
-  # Worker nodes (Longhorn disks attached automatically)
-  vkn1    = "10.10.11.4/23"
-  vkn2    = "10.10.11.5/23"
-
-  # Ansible management node
-  ansible = "10.10.11.150/23"
+  k3s-master-01 = "10.10.11.1/23"
+  k3s-master-02 = "10.10.11.2/23"
+  k3s-master-03 = "10.10.11.3/23"
+  k3s-worker-01 = "10.10.11.11/23"
+  k3s-worker-02 = "10.10.11.12/23"
 }
 
-# Gateway for your /23 network
 ipv4_gateway = "10.10.10.1"
+
+# Optional: Consul ACL token (if Consul ACL is enabled)
+# consul_token = "your-consul-acl-token-here"
