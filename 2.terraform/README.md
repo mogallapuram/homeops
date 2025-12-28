@@ -397,41 +397,7 @@ homeops/
 
 ---
 
-## 🎯 Next Steps
 
-After VMs are created:
-
-### 1. Install K3s on Master Nodes
-
-```bash
-# On first master (k3s-master-01)
-curl -sfL https://get.k3s.io | sh -s - server \
-  --cluster-init \
-  --tls-san=10.10.11.1 \
-  --disable=traefik
-
-# Get token
-sudo cat /var/lib/rancher/k3s/server/node-token
-
-# On additional masters
-curl -sfL https://get.k3s.io | sh -s - server \
-  --server https://10.10.11.1:6443 \
-  --token <TOKEN_FROM_MASTER_01>
-```
-
-### 2. Join Worker Nodes
-
-```bash
-# On workers
-curl -sfL https://get.k3s.io | K3S_URL=https://10.10.11.1:6443 \
-  K3S_TOKEN=<TOKEN_FROM_MASTER_01> sh -
-```
-
-### 3. Install Longhorn
-
-```bash
-kubectl apply -f https://raw.githubusercontent.com/longhorn/longhorn/v1.5.3/deploy/longhorn.yaml
-```
 
 ---
 
@@ -553,7 +519,7 @@ MIT License - See LICENSE file for details
 **Author:** Ramakrishna Mogallapu  
 **Project:** HomeOps — K3s Cluster on Proxmox  
 **Infrastructure:** Proxmox VE 9 + Terraform + Consul  
-**Last Updated:** December 29, 2024  
+**Last Updated:** December 29, 2025 
 **Version:** 1.0.0
 
 ---
